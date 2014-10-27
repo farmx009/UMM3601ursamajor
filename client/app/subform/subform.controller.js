@@ -4,7 +4,10 @@ angular.module('umm3601ursamajorApp')
   .controller('SubformCtrl', function ($scope, $http, Auth, $location) {
 
     // redirects the user to the home page if they are not  logged in
-    if(Auth.isLoggedIn === false) {
+    console.log("checking for user authentication...");
+    console.log("User is log in: " + Auth.isLoggedIn());
+    if(Auth.isLoggedIn() === false) {
+        console.log("User not logged in! Redirecting to home page...");
         $location.path('/');
     }
 

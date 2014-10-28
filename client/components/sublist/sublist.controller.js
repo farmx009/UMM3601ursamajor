@@ -16,13 +16,19 @@ angular.module('umm3601ursamajorApp')
         }
     })
 
-    .controller('SublistCtrl', function ($scope, $http, socket) {
+    .controller('SublistCtrl', function ($scope, $http, socket, $modal, Modal) {
         $scope.submissions = [];
 
         $http.get('/api/submissions').success(function(submissions) {
             $scope.submissions = submissions;
             socket.syncUpdates('submission', $scope.submissions);
         });
+
+        $scope.statusList = [
+            'Pending Approval',
+            'Approved',
+            'Awaiting Adviser Approval'
+        ];
 
         $scope.statusColorTab = function(status){
             switch(status){
@@ -56,7 +62,7 @@ angular.module('umm3601ursamajorApp')
                     return {'background-color': 'rgba(255, 0, 0, 1)'};
                     break;
             }
-        }
+        };
 
         $scope.selection = {selected: false, item: null};
 
@@ -70,10 +76,23 @@ angular.module('umm3601ursamajorApp')
             $scope.selection.selected = false;
         };
 
+        $scope.deleteSubmissionConfirm = function(item){
+              Modal.confirm.delete($scope.deleteSubmission)(item.title, item);
+        };
+
         $scope.deleteSubmission = function(item){
             console.log("Deleting submission: " + item.title);
             $http.delete('/api/submissions/' + item._id);
             $scope.resetSelection();
         };
+
+        $scope.editStatusModal = function(item){
+            var html = '<select>';
+            Modal.edit.editStatus($scope.editStatus, html, $scope)(item.title);
+        };
+
+        $scope.editStatus = function(){
+            console.log("stuff was edited!");
+        }
 
     });

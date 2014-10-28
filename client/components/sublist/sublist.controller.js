@@ -24,22 +24,39 @@ angular.module('umm3601ursamajorApp')
             socket.syncUpdates('submission', $scope.submissions);
         });
 
-        $scope.statusColor = function(status){
+        $scope.statusColorTab = function(status){
             switch(status){
                 case "Pending Review":
-                    return {'color': 'rgba(255, 220, 10, 1)'};
+                    return {'border-left': '4px solid rgba(255, 220, 10, 1)'};
                     break;
                 case "Awaiting Revisions":
-                    return {'color': 'rgba(255, 220, 10, 1)'};
+                    return {'border-left': '4px solid rgba(255, 220, 10, 1)'};
                     break;
                 case "Approved":
-                    return {'color': 'rgba(0, 255, 0, 1)'};
+                    return {'border-left': '4px solid rgba(0, 255, 0, 1)'};
                     break;
                 case "Awaiting Adviser Approval":
-                    return {'color': 'rgba(255, 0, 0, 1)'};
+                    return {'border-left': '4px solid rgba(255, 0, 0, 1)'};
                     break;
             }
         };
+
+        $scope.statusColorBody = function(status){
+            switch(status){
+                case "Pending Review":
+                    return {'background-color': 'rgba(255, 220, 10, 1)'};
+                    break;
+                case "Awaiting Revisions":
+                    return {'background-color': 'rgba(255, 220, 10, 1)'};
+                    break;
+                case "Approved":
+                    return {'background-color': 'rgba(0, 255, 0, 1)'};
+                    break;
+                case "Awaiting Adviser Approval":
+                    return {'background-color': 'rgba(255, 0, 0, 1)'};
+                    break;
+            }
+        }
 
         $scope.selection = {selected: false, item: null};
 

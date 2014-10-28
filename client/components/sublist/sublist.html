@@ -2,7 +2,7 @@
 
     <ul class="list-group" ng-hide="selection.selected">
         <li class="list-group-item"><h2>List of stored submissions</h2></li>
-        <li class="list-group-item" ng-repeat="sub in submissions">
+        <li class="list-group-item" ng-style="statusColorTab(sub.status.strict)" ng-repeat="sub in submissions">
             <h3>{{sub.title}}</h3>
             <strong>{{sub.presenterInfo.last}}, {{sub.presenterInfo.first}}</strong>
             <hr>
@@ -18,7 +18,6 @@
                     <p>Abstract: <br> {{sub.abstract | limitTo: 300}}</p>
                 </li>
             </ul>
-            <span class="glyphicon glyphicon-file" ng-style="statusColor(sub.status.strict)"></span>
             <button class="btn btn-primary btn-sm" ng-click="selectItem($index)">Details</button>
             <br>
         </li>
@@ -30,7 +29,11 @@
             <br>
             <button class="btn btn-sm btn-danger" ng-click="deleteSubmission(selection.item)"><span class="glyphicon glyphicon-trash"></span></button>
         </li>
-        <li class="list-group-item">
+        <li class="list-group-item" ng-style="statusColorTab(selection.item.status.strict)">
+            <div class="block alert" ng-style="statusColorBody(selection.item.status.strict)">
+                <b>Status:</b> {{selection.item.status.strict}} <br>
+                <b>Comment:</b> {{selection.item.status.text}}</p>
+            </div>
             <h3>{{selection.item.title}}</h3>
             <strong>{{selection.item.presenterInfo.last}}, {{selection.item.presenterInfo.first}}</strong>
             <hr>

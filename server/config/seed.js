@@ -70,7 +70,7 @@ Submission.find({}).remove(function(){
         presenterTeeSize: "S",
         otherInfo: "",
         approval: false,
-        status: "Pending approval"
+        status: {strict: "Pending Review", text: "Has not been reviewed yet"}
     }, {
         title: "Bill & Nye's Excellent Experimental Adventure",
         format: "Artist Statement",
@@ -89,7 +89,7 @@ Submission.find({}).remove(function(){
         presenterTeeSize: "XL",
         otherInfo: "",
         approval: false,
-        status: "Pending approval"
+        status: {strict: "Pending Review", text: "Not all reviewers have had a chance to look at it yet"}
     }, {
         title: "On the migration of majestic space whales",
         format: "Artist Statement",
@@ -109,7 +109,7 @@ Submission.find({}).remove(function(){
         presenterTeeSize: "XXXXXXXXXXXXXXXXXXXXL",
         otherInfo: "yes.",
         approval: true,
-        status: "Ready for launch"
+        status: {strict: "Approved", text: "Ready for launch"}
     }, {
         title: "Vampires in US History",
         format: "Social Science",
@@ -128,7 +128,7 @@ Submission.find({}).remove(function(){
         presenterTeeSize: "S",
         otherInfo: "yes.",
         approval: false,
-        status: "Pending approval"
+        status: {strict: "Awaiting Revisions", text: "Presenter needs to respond to comments and make some changes"}
     }, {
         title: "A study of the properties of a paperclip in the digestive system of a sloth",
         format: "Artist Statement",
@@ -140,7 +140,7 @@ Submission.find({}).remove(function(){
         formatChange: false,
         presenterInfo: {first: "Sally", last: "Birch", email: "birch001@morris.umn.edu"},
         copresenterOneInfo: {first: "Timmy", last: "Flabberghast III", email: "flabb137@morris.umn.edu"},
-        copresenterTwoInfo: {first: "Dill", last: "Pickle", email: "pickl002@morris.umn.edu"},
+        copresenterTwoInfo: {first: "Dill", last: "Pickle", email: "pickl002@morris.umn.eu"},
         discipline: "pottery",
         sponsors: [], //Might need to worry about if this is static for the DB later.
         adviserInfo: {name: "KK Lamberty", email: "lamberty@morris.umn.edu"},
@@ -150,6 +150,6 @@ Submission.find({}).remove(function(){
         presenterTeeSize: "M",
         otherInfo: "Maybe",
         approval: false,
-        status: "Awaiting Adviser Approval"
+        status: {strict: "Awaiting Adviser Approval", text: "student did not check with adviser first!"}
     });
 });

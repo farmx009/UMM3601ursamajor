@@ -22,6 +22,20 @@ angular.module('umm3601ursamajorApp')
       });
     }
 
+    function openModalCustom(scope, modalClass, template) {
+        var modalScope = $rootScope.$new();
+        scope = scope || {};
+        modalClass = modalClass || 'modal-default';
+
+        angular.extend(modalScope, scope);
+
+        return $modal.open({
+            templateUrl: template,
+            windowClass: modalClass,
+            scope: modalScope
+        });
+    }
+
     // Public API here
     return {
 
@@ -50,7 +64,7 @@ angular.module('umm3601ursamajorApp')
               modal: {
                 dismissable: true,
                 title: 'Confirm Delete',
-                html: '<p>Are you sure you want to delete <strong>' + name + '</strong> ?</p>',
+                html: '<p>Are you sure you want to delete <strong>' + name + '</strong> ?</p> <br> <p>This will delete ALL data contained in this submission!!</p>',
                 buttons: [{
                   classes: 'btn-danger',
                   text: 'Delete',
@@ -72,6 +86,55 @@ angular.module('umm3601ursamajorApp')
             });
           };
         }
+      },
+
+        /**
+         * Not really working yet, just a general modal for editing stuff?
+         */
+      edit: {
+
+        /**
+        *
+        * @param edit
+        * @param html
+        * @param scope
+        */
+        editStatus: function(edit, html, scope){
+            edit = edit || angular.noop;
+
+            return function() {
+                var args = Array.prototype.slice.call(arguments),
+                    name = args.shift(),
+                    editModal;
+
+                editModal = openModalCustom({
+                    modal: {
+                        dismissable: true,
+                        title: 'Editing ' + name,
+                        html: html,
+                        buttons: [{
+                            classes: 'btn-warning',
+                            text: 'submit edit',
+                            click: function(e) {
+                                editModal.close(e);
+                            }
+                            }, {
+                            classes: 'btn-default',
+                            text: 'cancel',
+                            click: function(e) {
+                                editModal.dismiss(e);
+                            }
+                            }
+                        ]
+                    }
+                }, 'modal-default', 'components/modal/editStatus.html');
+
+                editModal.result.then(function(event, args) {
+                    edit.apply(event, args);
+                });
+            };
+        }
       }
+
     };
   });

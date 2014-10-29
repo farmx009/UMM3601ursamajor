@@ -96,7 +96,7 @@ Submission.find({}).remove(function(){
         presenterTeeSize: "S",
         otherInfo: "",
         approval: false,
-        status: "Pending approval"
+        status: {strict: "Pending Review", text: "Has not been reviewed yet"}
     }, {
         title: "Bill & Nye's Excellent Experimental Adventure",
         format: "Artist Statement",
@@ -115,12 +115,22 @@ Submission.find({}).remove(function(){
         presenterTeeSize: "XL",
         otherInfo: "",
         approval: false,
-        status: "Pending approval"
+        status: {strict: "Pending Review", text: "Not all reviewers have had a chance to look at it yet"}
     }, {
         title: "On the migration of majestic space whales",
         format: "Artist Statement",
-        abstract: "They swim through the endless void, without care and knowing not the concept of time. Through the study of these great beats we can come to better know not " +
-            "only their migration patterns, but ourselves as well.",
+        abstract: "They swim through the endless void, without care and knowing not the concept of time." +
+                "Through the study of these great beats we can come to better know not only their migration patterns," +
+                "but ourselves as well. Throughout time humanity has sought answers, be it through science, religion, or otherwise." +
+                "No matter the path of exploration, the fact remains that we always look to the stars. In this ground breaking research" +
+                "we will delve deep into the life of the majestic space whale. Discovered only recently, these grand creatures meander aimlessly" +
+                "throughout the stars, living millions of years. Through the study of their migration patterns, we can gain insight into interstellar travel" +
+                "and means by which life can be sustained in a vacuum. Although the focus of this research is on the migration patterns of these" +
+                "great beasts and their applicability to commercial space travel, during our research we were privileged to witness the death of" +
+                "a space whale, and we would be wrong not to make note of the event. From what we know, a space whale gradually grows in size over the course of it's" +
+                "life, as is the case with many animals we are already familiar with. However, the lack of gravity in space allows the space whale to grow in size seemingly without" +
+                "limit. Eventually, provided it is not killed by other means, a space whale will reach a size where it develops a noticeable gravity of it's own. Once this " +
+                "happens layers of dust and rock will begin to collect upon the space whale until eventually the space whale is rendered unable to feed, or is crushed to death.",
         presentationType: "Performance",
         formatChange: false,
         presenterInfo: {first: "Timmy", last: "Flabberghast III", email: "flabb137@morris.umn.edu"},
@@ -135,7 +145,7 @@ Submission.find({}).remove(function(){
         presenterTeeSize: "XXXXXXXXXXXXXXXXXXXXL",
         otherInfo: "yes.",
         approval: true,
-        status: "Ready for launch"
+        status: {strict: "Approved", text: "Ready for launch"}
     }, {
         title: "Vampires in US History",
         format: "Social Science",
@@ -154,7 +164,7 @@ Submission.find({}).remove(function(){
         presenterTeeSize: "S",
         otherInfo: "yes.",
         approval: false,
-        status: "Pending approval"
+        status: {strict: "Awaiting Revisions", text: "Presenter needs to respond to comments and make some changes"}
     }, {
         title: "A study of the properties of a paperclip in the digestive system of a sloth",
         format: "Artist Statement",
@@ -166,7 +176,7 @@ Submission.find({}).remove(function(){
         formatChange: false,
         presenterInfo: {first: "Sally", last: "Birch", email: "birch001@morris.umn.edu"},
         copresenterOneInfo: {first: "Timmy", last: "Flabberghast III", email: "flabb137@morris.umn.edu"},
-        copresenterTwoInfo: {first: "Dill", last: "Pickle", email: "pickl002@morris.umn.edu"},
+        copresenterTwoInfo: {first: "Dill", last: "Pickle", email: "pickl002@morris.umn.eu"},
         discipline: "pottery",
         sponsors: [], //Might need to worry about if this is static for the DB later.
         adviserInfo: {name: "KK Lamberty", email: "lamberty@morris.umn.edu"},
@@ -176,6 +186,6 @@ Submission.find({}).remove(function(){
         presenterTeeSize: "M",
         otherInfo: "Maybe",
         approval: false,
-        status: "Awaiting Adviser Approval"
+        status: {strict: "Awaiting Adviser Approval", text: "student did not check with adviser first!"}
     });
 });

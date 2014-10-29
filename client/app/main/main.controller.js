@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('umm3601ursamajorApp')
-  .controller('MainCtrl', function ($scope, $http, socket) {
+  .controller('MainCtrl', function ($scope, $http, socket, Auth) {
     $scope.awesomeThings = [];
 
     $http.get('/api/things').success(function(awesomeThings) {
@@ -16,6 +16,8 @@ angular.module('umm3601ursamajorApp')
       $http.post('/api/things', { name: $scope.newThing });
       $scope.newThing = '';
     };
+
+    $scope.isLoggedIn = Auth.isLoggedIn;
 
     $scope.deleteThing = function(thing) {
       $http.delete('/api/things/' + thing._id);

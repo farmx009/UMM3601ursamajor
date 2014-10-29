@@ -12,6 +12,17 @@ angular.module('umm3601ursamajorApp')
 //        $scope.submissions = submissions;
 //    });
 
+        $scope.roleOptions =
+            ['Student',
+                'Review Group 1',
+                'Review Group 2',
+                'Committee Chair'
+            ];
+       $scope.role =
+            [""];
+
+
+
     $scope.delete = function(user) {
       User.remove({ id: user._id });
       angular.forEach($scope.users, function(u, i) {
@@ -20,4 +31,21 @@ angular.module('umm3601ursamajorApp')
         }
       });
     };
+
+    $scope.changeRole = function(user) {
+        console.log(user);
+        Auth.changeRole(user.role , user);
+    };
+
+//    $scope.updateRole = function(user) {
+//        $scope.updatedUser = {
+//            name: user.name,
+//            email: user.email,
+//            password: user.password,
+//            role: $scope.role
+//        };
+//        $scope.delete(user);
+//        Auth.createUser($scope.updatedUser);
+//        $scope.users = User.query();
+//    };
   });

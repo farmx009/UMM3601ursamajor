@@ -24,19 +24,13 @@ angular.module('umm3601ursamajorApp')
             socket.syncUpdates('submission', $scope.submissions);
         });
 
-        $scope.statusList = [
-            'Pending Approval',
-            'Approved',
-            'Awaiting Adviser Approval'
-        ];
-
         $scope.statusColorTab = function(status){
             switch(status){
                 case "Pending Review":
                     return {'border-left': '4px solid rgba(255, 220, 10, 1)'};
                     break;
                 case "Awaiting Revisions":
-                    return {'border-left': '4px solid rgba(255, 220, 10, 1)'};
+                    return {'border-left': '4px solid rgba(0, 0, 255, 1)'};
                     break;
                 case "Approved":
                     return {'border-left': '4px solid rgba(0, 255, 0, 1)'};
@@ -53,7 +47,7 @@ angular.module('umm3601ursamajorApp')
                     return {'background-color': 'rgba(255, 220, 10, 1)'};
                     break;
                 case "Awaiting Revisions":
-                    return {'background-color': 'rgba(255, 220, 10, 1)'};
+                    return {'background-color': 'rgba(0, 0, 255, 1)'};
                     break;
                 case "Approved":
                     return {'background-color': 'rgba(0, 255, 0, 1)'};
@@ -64,6 +58,7 @@ angular.module('umm3601ursamajorApp')
             }
         };
 
+        // Controlling selection of submission for detail view
         $scope.selection = {selected: false, item: null};
 
         $scope.selectItem = function(itemIndex){
@@ -86,13 +81,24 @@ angular.module('umm3601ursamajorApp')
             $scope.resetSelection();
         };
 
-        $scope.editStatusModal = function(item){
-            var html = '<select>';
-            Modal.edit.editStatus($scope.editStatus, html, $scope)(item.title);
+        // Controlling editing of status in details view
+        $scope.statusEdit = {
+            editing: false,
+            options: ["Awaiting Adviser Approval", "Approved", "Awaiting Revisions", "Pending Review"]
         };
 
         $scope.editStatus = function(){
-            console.log("stuff was edited!");
+            $scope.statusEdit.editing = !$scope.statusEdit.editing;
+        };
+
+        $scope.submitStatusEdit = function(){
+            $http.patch('api/submissions/' + $scope.selection.item._id,
+                {status: {strict: $scope.selection.item.status.strict, text: $scope.selection.item.status.text}}
+            ).success(function(){
+                    console.log("Success!!!");
+            });
+            $scope.editStatus();
         }
+
 
     });

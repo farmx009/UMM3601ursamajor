@@ -6,14 +6,16 @@
     <p ng-if="modal.text" ng-bind="modal.text"></p>
     <div ng-if="modal.html" ng-bind-html="modal.html"></div>
 
+    <!-- eventually, the options for statuses will be stored in / retrieved from the database? -->
     <div class="row container-fluid">
         <div class="col-sm-6">
             <select>
-                <option ng-repeat="status in statusList">{{status}}</option>
+                <option></option>
             </select>
         </div>
         <div class="col-sm-6">
             <textarea></textarea>
+
         </div>
     </div>
 
